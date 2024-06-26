@@ -81,7 +81,7 @@ export const loginController = async(req, res) => {
       }
       const match = await comparePassword(password, user.password)
       if(!match){
-         return res.status(200).send({
+         return res.status(404).send({
             success: false,
             message: "Invalid Password"
          })
@@ -102,13 +102,12 @@ export const loginController = async(req, res) => {
                user: user.username,
                email: user.useremail,
                phone: user.phone,
-               password: user.password
             },
             token,
          })
    } catch (error) {
       console.log(error);
-      res.status(500).send({
+      res.status(404).send({
          success: false,
          message: "Error in Login",
          error
@@ -150,7 +149,7 @@ export const forgetPasswordcontroller = async(req, res) => {
       })
    } catch (error) {
       console.log(error)
-      res.status(500).send({
+      res.status(404).send({
          success: false,
          message: "Something went wrong",
          error
